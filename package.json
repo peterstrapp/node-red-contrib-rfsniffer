@@ -1,0 +1,23 @@
+{
+    "name"          : "node-red-contrib-rfsniffer",
+    "version"       : "0.1.0",
+    "description"   : "Node-RED node that listens for messages on 433Mhz",
+    "dependencies"  : {
+        "rcswitch-peterstrapp":"~0.3.0"
+    },
+    "repository" : {
+        "type":"git",
+        "url":"https://github.com/peterstrapp/node-red-contrib-rfsniffer"
+    },
+    "keywords": [ "node-red", "rf", "433" ],
+    "node-red"      : {
+        "nodes"     : {
+            "rfsniffer": "rfsniffer.js"
+        }
+    },
+    "author": {
+        "name": "Peter Strapp",
+        "email": "peter@strapp.co.uk",
+        "url": "http://www.strapp.co.uk"
+    }
+}

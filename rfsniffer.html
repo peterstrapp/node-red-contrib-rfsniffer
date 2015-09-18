@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    RED.nodes.registerType('rfsniffer',{
+        category: 'input',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""},
+            pin: {value: 27, validate:RED.validators.number()}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "file.png",
+        label: function() {
+            return this.name||"rfsniffer";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="rfsniffer">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-pin"><i class="icon-tag"></i> Pin</label>
+        <input type="text" id="node-input-pin" placeholder="Raspberry Pi pin">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="rfsniffer">
+    <p>A node that recieves data from 433MHz reciever on a RaspberryPi.</p>
+</script>
