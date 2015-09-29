@@ -5,20 +5,20 @@ module.exports = function(RED) {
         var node = this;
 
         this.on('input', function(msg) {
-            var rcswitch = require('rcswitch');
+            var RF = require('rfsensor');
+            var rfsensor = new RF();
 
-            if(rcswitch.enableReceive(node.pin)) {
-	        node.log('Receive enabled on pin: ' + node.pin);
+            rfsensor.on('dataAvailable', function(data) {
+                node.log('Data received');
+                msg.payload = data;
+                node.send(msg);
+            })
 
-	        setInterval(function(){
-	            if (rcswitch.available()) {
-	                node.log('Data received');
-	                msg.payload = rcswitch.getReceivedValue();
-                        rcswitch.resetAvailable();
-	                node.send(msg);
-	            }
-	        }, 1000);
-	    }
+            rfsensor.on('receiveEnabled', function(pin) {
+                node.log('Receive enabled on pin: ' + pin);
+            })
+
+            rfsensor.receive(node.pin);
         });
     }
     RED.nodes.registerType("rfsniffer", RFSnifferNode);

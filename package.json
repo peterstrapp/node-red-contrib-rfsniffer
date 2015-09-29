@@ -3,7 +3,7 @@
     "version"       : "0.1.0",
     "description"   : "Node-RED node that listens for messages on 433Mhz",
     "dependencies"  : {
-        "rcswitch-peterstrapp":"~0.3.0"
+        "rfsensor":"~0.0.1"
     },
     "repository" : {
         "type":"git",
