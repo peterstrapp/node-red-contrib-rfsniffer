@@ -3,7 +3,7 @@
     "version"       : "0.1.0",
     "description"   : "Node-RED node that listens for messages on 433Mhz",
     "dependencies"  : {
-        "rfsensor":"~0.0.1"
+        "homeduino": "~0.0.46"
     },
     "repository" : {
         "type":"git",

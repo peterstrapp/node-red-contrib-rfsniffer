@@ -1,3 +1,4 @@
+var homeduino = require('homeduino');
 module.exports = function(RED) {
     function RFSnifferNode(config) {
         RED.nodes.createNode(this,config);
@@ -5,20 +6,23 @@ module.exports = function(RED) {
         var node = this;
 
         this.on('input', function(msg) {
-            var RF = require('rfsensor');
-            var rfsensor = new RF();
+          var Board = homeduino.Board;
+          var board = new Board('gpio', {});
 
-            rfsensor.on('dataAvailable', function(data) {
-                node.log('Data received');
-                msg.payload = data;
-                node.send(msg);
-            })
+          board.on("rfReceive", function(event) {
+            node.log('Raw data:', event.pulseLengths, event.pulses);
+          });
 
-            rfsensor.on('receiveEnabled', function(pin) {
-                node.log('Receive enabled on pin: ' + pin);
-            })
+          board.on("rf", function(event) {
+            msg.payload = event;
+            node.send(msg);
+          });
 
-            rfsensor.receive(node.pin);
+          board.connect().then(function() {
+            board.rfControlStartReceiving(parseInt(node.pin)).then(function() {
+              node.log('Receive enabled on pin: ' + node.pin);
+            }).done();
+          }).done();
         });
     }
     RED.nodes.registerType("rfsniffer", RFSnifferNode);
