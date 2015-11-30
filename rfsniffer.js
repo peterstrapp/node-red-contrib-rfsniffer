@@ -9,10 +9,6 @@ module.exports = function(RED) {
           var Board = homeduino.Board;
           var board = new Board('gpio', {});
 
-          board.on("rfReceive", function(event) {
-            node.log('Raw data:', event.pulseLengths, event.pulses);
-          });
-
           board.on("rf", function(event) {
             msg.payload = event;
             node.send(msg);
